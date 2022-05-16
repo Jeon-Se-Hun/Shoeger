@@ -1,0 +1,299 @@
+@charset "UTF-8";
+
+
+
+
+#table1{
+	margin-left: 30px;
+	width: 1030px;
+	
+	text-align: center;
+	line-height: 50px;
+	height: 250px;
+}
+
+#table1 input[type= "text"]{
+	position:relative;
+	height: 20px;
+	width: 150px;
+	top: -2px;
+	
+	padding-left: 5px;
+}
+
+#table1 input[type= "button"]{
+	position:relative;
+	height: 25px;
+	width: 50px;
+	top: -2px;
+	
+}
+
+#table1 select{
+	position:relative;
+	height: 25px;
+	width: 100px;
+	top: -2px;
+	
+}
+
+#table1 img{
+	position:relative;
+	top: 8px;
+}
+
+
+#table1 h3{
+	text-align: left;
+}
+#table1 div{
+	float: left;
+	border: 1px solid #ccc;
+}
+
+#table1 > div:nth-of-type(2n+1){
+	border: 1px solid #ccc;
+	width: 200px;
+	height: 50px;
+	background: #eee;
+}
+
+#table1 > div:nth-of-type(2n+2){
+	width: 800px;
+	height: 50px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+#table1 > div:nth-of-type(2) > input{
+	width: 80px;
+	height: 30px;
+	border: 1px solid #ccc;	
+	margin-top: 10px;
+	line-height: 30px;
+	text-align: center;
+	background: #fff
+}
+
+#table2{
+	width: 1030px;
+	height: 1000px;
+	margin-left: 30px;
+}
+
+#table2 input[type= "text"]{
+	position:relative;
+	height: 20px;
+	width: 120px;
+	top: -2px;
+	
+	border: none;
+	outline: none;
+	text-align:center;
+	padding-left: 5px;
+}
+
+
+#table2 input[type= "button"]{
+	position:relative;
+	height: 25px;
+	top: -2px;
+	
+	padding-left: 2px;
+}
+#table2 select{
+	position:relative;
+	height: 25px;
+	top: -3px;
+	width: 100px;
+	padding-left: 2px;
+}
+
+#table2 > div > div{
+	float: left;
+	
+	border: 1px solid #bbb;
+	box-sizing: border-box;
+	
+	text-align: center;
+	
+}
+
+#table2 > #title > div{
+	height: 30px;
+	
+	background: #eee;
+	
+	line-height: 30px;	
+}
+
+#table2 > #date > div{
+	height: 30px;
+	
+	background: #fff;
+	
+	line-height: 30px;
+}
+
+
+#table2 > div > div:nth-of-type(7n+1){
+	width: 60px;
+}
+
+#table2 > div > div:nth-of-type(7n+2){
+	width: 160px;
+}
+#table2 > div > div:nth-of-type(7n+3){
+	width: 160px;
+}
+#table2 > div > div:nth-of-type(7n+4){
+	width: 180px;
+}
+
+#table2 > div > div:nth-of-type(7n+5){
+	width: 160px;
+}
+
+#table2 > div > div:nth-of-type(7n+6){
+	width: 200px;
+}
+#table2 > div > div:nth-of-type(7n+7){
+	width: 100px;
+}
+
+#ppinsert{
+	height: 30px;
+	width: 100%;
+	text-align: right;
+}
+
+.btn1 {
+	border: none;
+	outline: none;
+	background-color: white;
+	color: #aaaaaa;
+	font-size: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+}
+
+.btn1:hover {
+	color: black;
+}
+
+.btn1:focus {
+	color: black;
+}
+
+.btnCC {
+	color: black;
+}
+.btnDD{
+	text-align: center;
+	height: 300px;
+	line-height: 80px;
+}
+
+
+
+
+#modal {
+	display: none;
+	position:fixed;
+	
+	left: 35%;
+	z-index:1;
+}
+
+#modal h2 {
+	margin:0;
+}
+#modal button {
+	display:inline-block;
+	width:100px;
+	margin-left:calc(100% - 100px - 10px);
+}
+
+#modal .modal_content {
+	width:500px;
+	height: 150px;
+	margin:100px auto;
+	padding:20px 10px;
+	background:#fff;
+	border:2px solid #666;
+}
+#modal .modal_content > div {
+	margin-left: 20px;
+}
+#modal .modal_content > div > h4{
+	margin: 5px 0 20px 0;
+}
+
+#modal .modal_content > div > span{
+	font-size: 13px;
+}
+
+
+#modal .modal_layer {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0, 0, 0, 0.5);
+	z-index:-1;
+}  
+
+
+#root #modal_opne_btn{
+	margin: 8px 0;
+	width: 80px;
+	height: 30px;
+}
+
+#modal table{
+	border-spacing: 0px;
+	text-align: center;
+}
+
+#modal table tr td {
+	border: 1px solid #ccc;
+	line-height: 40px;
+	height: 40px;
+	
+	
+}
+
+#modal table tr td select{
+	
+	width: 150px;
+	height: 30px;
+	
+	
+}
+#modal table tr td:nth-of-type(1) {
+	width: 180px;
+	
+	background: #eee;
+	
+	
+}
+#modal table tr td:nth-of-type(2) {
+	width: 280px;
+}
+
+
+#modal_close_btn1{
+	
+	width: 80px;
+	height: 25px;
+	margin-left: 315px;
+	margin-top: 20px;
+}
+#modal_close_btn{
+	
+	width: 80px;
+	height: 25px;
+	margin-left: 2px;
+}

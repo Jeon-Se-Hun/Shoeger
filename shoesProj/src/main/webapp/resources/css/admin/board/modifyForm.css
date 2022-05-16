@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.move> div> a:link {
+	color: black;
+}
+
+.move> div> a:visited {
+	color: black;
+}
+
+.move> div> a:hover {
+	color: black;
+}
+
+.move> div> a:active {
+	color: gray;
+}
+
+.move> div> a {
+	text-decoration: none;
+}
+
+hr{
+	height: 3px; 
+	border: none; 
+	background-color: #505050;
+}
+
+.total {
+	width: 1000px;
+	height: 800px;
+}
+
+.signboard {
+	font-size: 30px;
+	padding-top: 5px;
+	padding-bottom: 16px;
+}
+
+.writeTitle>input {
+	margin-top: 10px;
+	width: 850px;
+	height: 30px;
+	border-style: solid;
+	border-color: #828282;
+	border-radius: 0.4em;
+}
+
+.createFile>input {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.createFile>img {
+	height: 200px;
+	width: auto;
+}
+
+.create>textarea {
+	width: 500px;
+	height: 450px;
+	background: #f7f7f7;
+	width: 962px;
+}
+
+.contents {
+	padding: 18px;
+	font-size: 16px;
+	font-weight: 550;
+}
+
+.move {
+	padding-top: 15px;
+	border-top: 1px solid;
+	border-top-color: #828282;
+	text-align: right;
+}
+
+.move>* {
+	padding-left: 15px;
+	padding-right: 15px;
+	font-weight: 550;
+	background-color: #eeeeee;
+	border-radius: 0.4em;
+	height: 30px;
+}
+
+.move>div {
+	padding-top: 5px;
+	float: left;
+	width: 50px;
+	height: 30px;
+	text-align: center;
+}
+.wrapper #body{
+	height: 1%;
+}

@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+#fbbtn{
+	margin-top: 20px;
+	text-align: center;
+}
+
+#fbbtn > button{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#outer_jhy{	
+	height: 650px;
+	padding: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+#prodImg{
+	width: 400px;
+	height: 400px;
+	
+}
+
+#prodInfo{
+	width: 450px;
+	height: 400px;
+	
+}
+
+#photo{
+	width: 400px;
+	height: 400px;
+}
+
+#sbBtn > button{
+	
+	height: 60px;
+	font-size: 17px;
+	font-family: "HY견고딕";
+	color: #fff;
+}
+
+#zzim{
+	width: 170px;
+	text-align: center;
+	font-size: 17px;
+	font-family: "HY견고딕";
+	color: #fff;
+}
+
+#bBtn{
+	width: 270px;
+	background: #EF6253;
+	border-radius: 10px;
+}
+
+#bBtn > div{
+	height: 40px;
+	float:left;
+	line-height: 40px;
+}
+
+#bactionBtn{
+	width: 60px;
+	border-right: 1px solid #ccc;
+}
+
+#sactionBtn{
+	width: 40px;
+	border-right: 1px solid #ccc;
+}
+
+#sBtn{
+	width: 170px;
+	height: 60px;
+	background: #0f0;
+	border-radius: 10px;
+		
+}
+
+#sBtn > div{
+	height: 50px;
+	float:left;
+	line-height: 50px;
+}
+
+#sbBtn{
+	margin-top: 70px;
+	display: flex;
+	justify-content: space-around;
+	height: 40px;
+	
+}
+
+#bpricebtn{
+	padding-left: 70px;
+}
+
+#sprice{
+	
+	padding-left: 20px;
+	
+}
+
+button{
+	background: none;
+	border: none;
+}
+
+.stockdetail {
+	padding: 10px;
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 40px;
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+img{
+	border-radius: 20px;	
+}
+
+select{
+	width: 100px;
+	height: 30px;
+}
+
+.modal fade {
+   display: none; 
+   position: fixed;
+   z-index: 1; 
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgb(0, 0, 0); 
+   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+   background-color: #fefefe;
+   margin: auto; 
+   padding: 20px;
+   left: -20%;
+   border: 1px solid #888;
+   width: 140%;
+}
+
+h1{
+	display: none;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#dename{
+	font-size: 24px;
+	font-weight: bolder;
+}
+
+#dkname{
+	font-size: 18px;
+	margin-bottom: 90px;
+}
+
+#gobackdiv{
+	margin-left: 90px;
+	width: 40px;
+	height: 40px;
+	
+}
+
+#goback{
+	width: 40px;
+	height: 30px;
+}
+
+#recmOuter{
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100%;
+	height: 300px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	display: flex;
+	justify-content: space-around;
+}
+
+#whataboutthis{
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+#recmSubOuter{
+	
+	width: 210px;
+	height: 250px;
+	
+}
+
+.recmImg{
+	width: 210px;
+	height: 210px;
+}
+
+#recmImgg{
+	width: 210px;
+	height: 210px;
+}
+
+.recmEname{
+	margin-top: 10px;
+	width: 210px;
+	height: 40px;
+}
+
+section{
+	height: 1100px;
+	
+}

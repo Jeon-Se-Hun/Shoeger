@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org/DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aaa.model.admin.AdminMapper">
+
+
+
+	<select id="ttTot" resultType="CalculateDTO" parameterType="SchDTO">
+		select sum(price) as tot,
+		date_format(adate,'%Y') as yy,
+		date_format(adate,'%m') as mm,
+		date_format(adate,'%d') as dd,
+		date_format(adate,'%H') as hh
+		from trade
+		where 
+		
+		<if test="kind == '매출'">
+			(kind = '${kind}' or kind = '취소')
+		</if>
+		<if test="kind != '매출'">
+			kind='${kind}' 
+		</if>
+		
+		and adate between #{sdate} and #{edate} 
+		group by date_format(adate,'${sch}');
+	</select>
+	
+	<select id="ttTotCnt" resultType="CalculateDTO" parameterType="SchDTO">
+		select count(*) as cnt, sum(price) as tot
+		from trade
+		where 
+		<if test="kind == '매출'">
+			(kind = '${kind}' or kind = '취소')
+		</if>
+		<if test="kind != '매출'">
+			kind='${kind}' 
+		</if>
+		and adate between #{sdate} and #{edate};
+	</select>
+
+
+	<select id="bbdetail" resultType="boardDTO" parameterType="boardDTO">
+		select * from board where id = #{id}
+	</select>
+
+	<select id="getAdminMenu" resultType="Menu" parameterType="java.lang.String">
+		select * from menu where kind = 'admin' and cate = #{cate}
+	</select>
+
+	<select id="ppList" resultType="ProductDTO" parameterType="ControllDTO">
+		select * from product
+		<choose>
+			<when test="schDTO.brand != '전체'">
+			 	<where>
+			 		brand = #{schDTO.brand}
+				 	<if test="schDTO.sch != null and schDTO.sch != ''">
+						and ${schDTO.skind} like '%${schDTO.sch}%'
+					</if>
+			 	</where>
+			</when>
+			<otherwise>
+				<if test="schDTO.sch != null and schDTO.sch != ''">
+					<where>
+						${schDTO.skind} like '%${schDTO.sch}%'
+					</where>
+				</if>
+			</otherwise>
+		</choose>
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	
+	<select id="ppListCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from product
+		<choose>
+			<when test="schDTO.brand != '전체'">
+			 	<where>
+			 		brand = #{schDTO.brand}
+				 	<if test="schDTO.sch != null and schDTO.sch != ''">
+						and ${schDTO.skind} like '%${schDTO.sch}%'
+					</if>
+			 	</where>
+			</when>
+			<otherwise>
+				<if test="schDTO.sch != null and schDTO.sch != ''">
+					<where>
+						${schDTO.skind} like '%${schDTO.sch}%'
+					</where>
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="ppDetail" resultType="ProductDTO" parameterType="ProductDTO">
+		select * from product where model = #{model}
+	</select>
+	<select id="ppDetailEname" resultType="ProductDTO" parameterType="ProductDTO">
+		select * from product where ename = #{ename}
+	</select>
+	<select id="ppDetailKname" resultType="ProductDTO" parameterType="ProductDTO">
+		select * from product where kname = #{kname}
+	</select>
+	
+	<delete id="ppDelete" parameterType="ProductDTO">
+		delete from product where model = #{model}
+	</delete>
+	
+	<update id="ppModify" parameterType="ProductDTO">
+		update product set 
+		kname = #{kname}, ename = #{ename}, brand = #{brand}, img1 = #{img1}, rel_date = #{rel_date}, rel_price = #{rel_price}
+		where model = #{model}
+	</update>
+	
+	
+	
+
+	<select id="ssList" resultType="StockDTO" parameterType="ControllDTO">
+		select * from stock s 
+		left outer join product p
+		on s.model = p.model
+				
+		
+		<choose>
+			<when test="schDTO.brand != '전체'">
+			 	<where>
+			 		s.brand = #{schDTO.brand}
+				 	<if test="schDTO.sch != null or schDTO.sch != ''">
+				 		<if test="schDTO.skind == 'model'">
+							and s.model like '%${schDTO.sch}%'
+						</if>
+				 		<if test="schDTO.skind == 'kname'">
+							and kname like '%${schDTO.sch}%'
+						</if>
+					</if>
+			 	</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="schDTO.sch != null or schDTO.sch != ''">
+						<if test="schDTO.skind == 'model'">
+							s.model like '%${schDTO.sch}%'
+						</if>
+				 		<if test="schDTO.skind == 'kname'">
+							kname like '%${schDTO.sch}%'
+						</if>
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+		
+		limit #{pageDTO.start}, #{pageDTO.limit}
+		
+	</select>
+	<select id="ssListCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from stock s 
+		left outer join product p
+		on s.model = p.model
+				
+		
+		<choose>
+			<when test="schDTO.brand != '전체'">
+			 	<where>
+			 		s.brand = #{schDTO.brand}
+				 	<if test="schDTO.sch != null or schDTO.sch != ''">
+				 		<if test="schDTO.skind == 'model'">
+							and s.model like '%${schDTO.sch}%'
+						</if>
+				 		<if test="schDTO.skind == 'kname'">
+							and kname like '%${schDTO.sch}%'
+						</if>
+					</if>
+			 	</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="schDTO.sch != null or schDTO.sch != ''">
+						<if test="schDTO.skind == 'model'">
+							s.model like '%${schDTO.sch}%'
+						</if>
+				 		<if test="schDTO.skind == 'kname'">
+							kname like '%${schDTO.sch}%'
+						</if>
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="ssDetail" resultType="StockDTO" parameterType="StockDTO">
+		select * from stock where productid = #{productid };
+	</select>
+	
+
+	<insert id="ssInsert" parameterType="StockDTO">
+		insert into stock
+		(pid, psize, grade, bprice, model, brand, img1, img2, img3, bdate, sprice)
+		values
+		(#{pid},#{psize},#{grade},#{bprice},#{model},#{brand},#{img1},#{img2},#{img3},sysdate(),#{sprice})
+		
+		<selectKey keyProperty="productid" order="AFTER" resultType="Integer">
+			select max(productid) from stock
+		</selectKey>
+	</insert>
+
+	
+	<update id="ssModify" parameterType="StockDTO">
+		update stock set 
+		sdate = null
+		where productid = #{productid}
+	</update>
+	
+
+	<select id="ooList" resultType="OrderDTO" parameterType="ControllDTO">
+		select * from porder 
+
+		where <![CDATA[pdate >= #{schDTO.sdate} and pdate < #{schDTO.edate}]]>
+		
+		<if test="schDTO.kind!=null and schDTO.kind!='' and schDTO.kind!='전체'">
+			and kind = #{schDTO.kind}
+		</if>
+		<if test="schDTO.state!=null and schDTO.state!='' and schDTO.state!='전체'">
+			and state = '${schDTO.state}'
+		</if>
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.skind} like '%${schDTO.sch}%'
+		</if>
+
+		order by pdate desc
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	
+	<select id="ooListCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from porder 
+
+		where <![CDATA[pdate >= #{schDTO.sdate} and pdate < #{schDTO.edate}]]>
+		
+		<if test="schDTO.kind!=null and schDTO.kind!='' and schDTO.kind!='전체'">
+			and kind = #{schDTO.kind}
+		</if>
+		<if test="schDTO.state!=null and schDTO.state!='' and schDTO.state!='전체'">
+			and state = '${schDTO.state}'
+		</if>
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.skind} like '%${schDTO.sch}%'
+		</if>
+	</select>
+
+	<select id="ooListCan" resultType="OrderDTO" parameterType="ControllDTO">
+		select * from porder 
+
+		where <![CDATA[pdate >= #{schDTO.sdate} and pdate < #{schDTO.edate}]]>
+		and (kind = '취소' or kind = '환불')
+		<if test="schDTO.state!=null and schDTO.state!='' and schDTO.state!='전체'">
+			and state = '${schDTO.state}'
+		</if>
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.skind} like '%${schDTO.sch}%'
+		</if>
+
+		order by pdate desc
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	
+	<select id="ooListCanCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from porder 
+
+		where <![CDATA[pdate >= #{schDTO.sdate} and pdate < #{schDTO.edate}]]>
+		and (kind = '취소' or kind = '환불')
+		<if test="schDTO.kind!=null and schDTO.kind!='' and schDTO.kind!='전체'">
+			and kind = #{schDTO.kind}
+		</if>
+		<if test="schDTO.state!=null and schDTO.state!='' and schDTO.state!='전체'">
+			and state = '${schDTO.state}'
+		</if>
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.skind} like '%${schDTO.sch}%'
+		</if>
+	</select>
+	
+	
+	
+	<select id="ooDetail" resultType="OrderDTO" parameterType="OrderDTO">
+		select * from porder where tradeid = #{tradeid };
+	</select>
+	
+	<update id="ooInsert" parameterType="OrderDTO">
+		update porder set 
+		state = #{state}
+		where tradeid = #{tradeid}
+	</update>
+	
+	<update id="ooModify" parameterType="OrderDTO">
+		update porder set 
+		state = #{state}, content = #{content}, productid = #{productid}
+		where tradeid = #{tradeid}
+	</update>
+	
+	<update id="ooModifyPP" parameterType="OrderDTO">
+		update porder set 
+		price = #{price}
+		where tradeid = #{tradeid}
+	</update>
+	
+	<update id="ooCancel" parameterType="OrderDTO">
+		update porder set 
+		sdate = 'sysdate()'
+		where tradeid = #{tradeid}
+	</update>
+	
+	
+	
+	
+
+	<select id="brandList" resultType="String">
+		select ename from brand order by ename 
+	</select>
+	
+	<select id="brandDTOCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from brand 
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+		 	where kname like '%${schDTO.sch}%' or 
+		 	ename like '%${schDTO.sch}%' or
+		 	content1 like '%${schDTO.sch}%' or
+		 	content2 like '%${schDTO.sch}%' or
+		 	content3 like '%${schDTO.sch}%'
+		</if>
+		order by id 
+	</select>
+	
+	<select id="brandDTOList" resultType="brandDTO" parameterType="ControllDTO">
+		select * from brand 
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+		 	where kname like '%${schDTO.sch}%' or 
+		 	ename like '%${schDTO.sch}%' or
+		 	content1 like '%${schDTO.sch}%' or
+		 	content2 like '%${schDTO.sch}%' or
+		 	content3 like '%${schDTO.sch}%'
+		</if>
+		order by id 
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	
+	
+	
+	<insert id="brandInsert" parameterType="brandDTO">
+		insert into brand
+		(kname, ename, content1, content2, content3, img, brandprint)
+		values
+		(#{kname},#{ename},#{content1},#{content2},#{content3},#{img},#{brandprint})
+		
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+			select max(id) from brand
+		</selectKey>
+	</insert>
+	
+	<delete id="brandDelete" parameterType="brandDTO">
+		delete from brand where id = #{id}
+	</delete>
+	
+	<select id="brandDetail" resultType="brandDTO" parameterType="brandDTO">
+		select * from brand where id = #{id };
+	</select>
+	
+	<select id="brandDetailKname" resultType="brandDTO" parameterType="brandDTO">
+		select * from brand where kname = #{kname } or ename = #{kname };
+	</select>
+	
+	<select id="brandDetailEname" resultType="brandDTO" parameterType="brandDTO">
+		select * from brand where ename = #{ename } or kname = #{ename };
+	</select>
+	
+	<update id="brandModify" parameterType="brandDTO">
+		update brand set 
+		kname = #{kname},
+		ename = #{ename},
+		content1 = #{content1},
+		content2 = #{content2},
+		content3 = #{content3},
+		img = #{img},
+		brandprint = #{brandprint}
+		
+		where id = #{id}
+	</update>
+	
+	<select id="showState" resultType="ShowStateDTO">
+		select 
+		count(case when state='미수령' then 1 end) as porder,
+		count(case when state='수령' then 1 end) as inspection,
+		count(case when state='검수중' then 1 end) as payComplete,
+		count(case when state='주문접수' then 1 end) as transProcess,
+		count(case when state='배송준비중' then 1 end) as transIng,
+		count(case when state='완료' and kind = '매출' then 1 end) as transComplete,
+		count(case when state='취소요청' then 1 end) as can,
+		count(case when state='환불요청' then 1 end) as canComplete
+		from porder;
+	</select>
+	
+	<select id="salesTot" resultType="TotDTO" parameterType="DateDTO">
+		select 
+		sum(case when kind='매출' and adate between date_format(#{stoday},'%Y-%m-%d')  and date_format(#{etoday},'%Y-%m-%d') then price end) as ddTot,
+		sum(case when kind='매출' and adate between date_format(#{sweekday},'%Y-%m-%d')  and date_format(#{eweekday},'%Y-%m-%d') then price end) as wwTot,
+		sum(case when kind='매출' and adate between date_format(#{smonthday},'%Y-%m-%d')  and date_format(#{emonthday},'%Y-%m-%d') then price end) as mmTot,
+		sum(case when kind='매출' and adate between date_format(#{syearday},'%Y-%m-%d')  and date_format(#{eyearday},'%Y-%m-%d') then price end) as yyTot
+		from trade;
+	</select>
+	
+	<select id="clientTot" resultType="TotDTO" parameterType="DateDTO">
+		select 
+		count(case when reg_date between date_format(#{stoday},'%Y-%m-%d')  and date_format(#{etoday},'%Y-%m-%d')  then 1 end) as ddTot,
+		count(case when reg_date between date_format(#{smonthday},'%Y-%m-%d')  and date_format(#{emonthday},'%Y-%m-%d') then 1 end) as mmTot,
+		count(case when reg_date between date_format(#{syearday},'%Y-%m-%d')  and date_format(#{eyearday},'%Y-%m-%d') then 1 end) as yyTot,
+		count(*) as wwTot
+		from client;
+	</select>
+	
+	
+	
+	<select id="visitTot" resultType="TotDTO" parameterType="DateDTO">
+		select         
+		count(case when visit_time between date_format(#{stoday},'%Y-%m-%d')  and date_format(#{etoday},'%Y-%m-%d')  then 1 end) as ddTot,
+		count(case when visit_time between date_format(#{sweekday},'%Y-%m-%d')  and date_format(#{eweekday},'%Y-%m-%d') then 1 end) as wwTot,
+		count(case when visit_time between date_format(#{smonthday},'%Y-%m-%d')  and date_format(#{emonthday},'%Y-%m-%d') then 1 end) as mmTot,
+		count(case when <![CDATA[visit_time >= #{syearday} and visit_time < #{eyearday} ]]> then 1 end) as yyTot
+		from visitor
+	</select>
+	
+	<select id="adminList" resultType="ClientDTO">
+		select * from client where kind='관리자';
+	</select>
+	
+	
+	
+	<select id="shopInfo" resultType="ClientDTO">
+		select * from client where kind='사업자';
+	</select>
+	
+	
+	
+	<select id="mainBoardlist" resultType="BoardDTO">
+		select * from board where kind = 'qna' order by reg_date desc limit 0, 5 ;
+	</select>
+
+	<update id="shopModify" parameterType="clientDTO">
+		update client set 
+		pid = #{pid}, maddress = #{maddress}, pname = #{pname}, phone = #{phone}, email = #{email}, address1 = #{address1},
+		address2 = #{address2},address3 = #{address3}, card = #{card}
+		where kind='사업자'
+	</update>
+	<select id="operList1" resultType="OperationDTO">
+		select * from operation where kind = '계좌';
+	</select>
+	
+	<select id="operList2" resultType="OperationDTO">
+		select * from operation where kind = '배송';
+	</select>
+	
+	<update id="operinsert" parameterType="OperationDTO">
+		update operation set 
+		bname = #{bname}, pnum = #{pnum}, pname = #{pname}
+		where pid = #{pid} and kind = #{kind}
+	</update>
+	
+
+	
+	
+	<select id="bblist" resultType="boardDTO" parameterType="ControllDTO">
+		select * from board where kind = #{bbDTO.kind }
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.skind} like '%${schDTO.sch}%'
+		</if>
+		order by id desc
+		limit #{pageDTO.start }, #{pageDTO.limit}
+	</select>
+	<select id="bblistCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from board where kind = #{bbDTO.kind }
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.skind } like '%${schDTO.sch}%'
+		</if>
+		order by id desc
+	</select>
+	
+	
+	
+	
+	<insert id="proinsert" parameterType="ProductDTO">
+		insert into product
+		(kname, ename, brand, model, rel_date, rel_price, img1, cnt, reg_date)
+		values
+		(#{kname},#{ename},#{brand},#{model},#{rel_date},#{rel_price},#{img1},0,sysdate())
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="cclist" resultType="clientDTO" parameterType="ControllDTO">
+		select * from client where 
+		(kind = '개인' or kind='네이버')
+		
+		<if test="schDTO.sdate!=null or schDTO.edate!=null">
+			and <![CDATA[reg_date >= #{schDTO.sdate} and reg_date < #{schDTO.edate}]]>
+		</if>
+		
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.kind} like '%${schDTO.sch}%'
+		</if>
+		
+		order by reg_date desc
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	
+	
+	<select id="cclistCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from client where 
+		(kind = '개인' or kind='네이버')
+		
+		<if test="schDTO.sdate != null or schDTO.edate != null">
+			and <![CDATA[reg_date >= #{schDTO.sdate} and reg_date < #{schDTO.edate}]]>
+		</if>
+		
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			and ${schDTO.kind} like '%${schDTO.sch}%'
+		</if>
+		
+		order by reg_date desc
+		
+	</select>
+	
+	
+	<select id="ccDetail" resultType="clientDTO" parameterType="clientDTO">
+		select * from client where pid = #{pid };
+	</select>
+	
+	
+	<update id="answermodify" parameterType="boardDTO">
+		update board set answer = #{answer} where id = #{id}
+	</update>
+	<select id="rbgusdetail" resultType="boardDTO" parameterType="boardDTO">
+		select * from board where id = #{id}
+	</select>
+	
+	
+	
+	
+	
+	<insert id="bbInsert" parameterType="boardDTO">
+      insert into  board (title, pid, upfile, content,kind, cnt, reg_date ) 
+      values (#{title}, #{pid}, #{upfile}, #{content}, #{kind}, 0, sysdate() )
+      
+      <selectKey keyProperty="id" order="AFTER" resultType="Integer">
+         select max(id) from board
+      </selectKey>
+      
+   </insert>
+   
+   <delete id="bbDelete" parameterType="boardDTO">
+      delete from board where id = #{id}
+   </delete>
+   
+   <update id="bbModify" parameterType="boardDTO">
+      update board set title = #{title}, upfile = #{upfile}, content = #{content} where id = #{id}
+   </update>
+	
+	
+	
+	
+	<insert id="ttInsert" parameterType="TradeDTO">
+		insert into trade
+		(pid, kind, price, adate, point, tradeid, transport)
+		values
+		(#{pid},#{kind},#{price},sysdate(),#{point}, #{tradeid },0)
+	</insert>
+	
+	<update id="ttModify" parameterType="TradeDTO">
+		update trade set 
+		kind = '취소', price=0, adate = sysdate()
+		where tradeid = #{tradeid}
+	</update>
+	 
+	<select id="ttDetail" resultType="TradeDTO" parameterType="TradeDTO">
+		select * from trade
+		where tradeid = #{tradeid} and kind='매출'
+	</select>
+	
+	
+	
+	
+	
+	<select id="memberdetail" resultType="ClientDTO" parameterType="clientDTO">
+		SELECT * FROM client where pid =#{pid}
+	</select>
+	
+	<insert id="memberinsert" parameterType="clientDTO">
+		insert into  client (kind, pid, pw, pname, email, address1, phone, birth, reg_date) 
+		values (#{kind}, #{pid}, #{pw}, #{pname}, #{email}, #{address1}, #{phone}, #{birth}, sysdate())
+	</insert>
+	
+	
+	<select id="ccdetail" resultType="clientDTO" parameterType="clientDTO">
+		select * from client where pid = #{pid }
+	</select>	
+	
+	<select id="visitlist" resultType="visitorDTO" parameterType="ControllDTO">
+		select * from visitor
+		order by visit_time desc
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	<select id="visitlistCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from visitor
+	</select>
+	
+	<select id="seclist" resultType="secessionDTO" parameterType="ControllDTO">
+		select * from secession
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			where ${schDTO.kind} like '%${schDTO.sch}%'
+		</if>
+		limit #{pageDTO.start}, #{pageDTO.limit}
+	</select>
+	
+	<select id="seclistCnt" resultType="java.lang.Integer" parameterType="ControllDTO">
+		select count(*) from secession
+		<if test="schDTO.sch != null and schDTO.sch != ''">
+			where ${schDTO.kind} like '%${schDTO.sch}%'
+		</if>
+	</select>
+	
+	<select id="secdetail" resultType="secessionDTO" parameterType="secessionDTO">
+		select * from secession where pid = #{pid }
+	</select>	
+	
+	<delete id="ccDelete" parameterType="clientDTO">
+      delete from client where pid = #{pid}
+   </delete>
+   
+    <insert id="addAdimin" parameterType="ClientDTO">
+      insert into client (kind, pid, pw, pname, email, address1, address2, address3, maddress, phone, reg_date) 
+      values (#{kind}, #{pid}, #{pw}, #{pname}, #{email}, #{address1}, #{address2}, #{address3}, #{maddress}, #{phone}, sysdate())
+   </insert>
+
+    <update id="ccModify" parameterType="clientDTO">
+      update client set pw = #{pw}, pname = #{pname}, email = #{email}, phone = #{phone}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}, maddress = #{maddress} where pid = #{pid}
+   </update>
+   
+    <update id="ccModifyPoint" parameterType="clientDTO">
+      update client set point = point - #{point} where pid = #{pid}
+   </update>
+   
+   
+    <update id="ppUdtRegdate" parameterType="ProductDTO">
+      update product set reg_date = sysdate() where model = #{model}
+   </update>
+   
+   
+</mapper>

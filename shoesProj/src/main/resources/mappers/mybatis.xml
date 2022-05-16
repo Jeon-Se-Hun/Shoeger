@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org/DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+
+<mapper namespace="aaa.model.db.ViewMapper" >
+
+<select id="schBrand" resultType="String" parameterType="String">
+	select brand from product
+	where model = #{model}
+</select>
+
+<select id="recList" resultType="MainDTO" parameterType="MainDTO">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and s.brand = #{brand}
+	group by p.model
+	order by cnt
+	limit 0,5
+	) as aa
+	
+</select>
+
+<select id="allprod" resultType="MainDTO" parameterType="MainDTO">
+	select * from product where brand = #{brand}
+</select>
+
+<update id="plusCnt" parameterType="MainDTO">
+	update product set cnt = cnt+1
+	where model = #{model}
+</update>
+
+<select id="modelinfo" resultType="MainDTO">
+	select * from product where model = #{model}
+</select>
+
+<select id="eachmodel" resultType="String">
+	select model from product where brand = #{brand}
+</select>
+
+<sql id = "whereGO">
+      <choose>
+         <when test="bDTO.sch != null and bDTO.sch != ''">
+             <where>
+                ${bDTO.kind} like '%${bDTO.sch}%'
+             </where>      
+         </when>
+      </choose>
+   </sql>
+
+<select id="getAllprod" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model) as aa
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="getAllprodpop" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model) as aa
+	order by cnt desc
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+<select id="getAllprodrel" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model) as aa
+	order by rel_date desc
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+<select id="getAllprodreg" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model) as aa
+	order by reg_date desc
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="totalCntAllprod" resultType="java.lang.Integer" parameterType="HashMap">
+	select count(*) from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where s.grade != '' and s.sdate is null
+	group by p.model) as aa
+</select>
+
+<select id="totalCnt" resultType="java.lang.Integer" parameterType="HashMap">
+	select count(*) from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where s.grade != '' and s.sdate is null and p.brand = #{mDTO.brand}
+	group by p.model) as aa
+      
+</select>
+
+<select id="totalCnt2" resultType="java.lang.Integer" parameterType="HashMap">
+	select count(*) from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and (p.brand like '%${mDTO.sch}%' or p.kname like '%${mDTO.sch}%' or p.ename like '%${mDTO.sch}%' or p.model like '%${mDTO.sch}%' ) and s.sdate is null
+	group by p.model) as aa;
+      
+</select>
+
+<select id="searchlist2" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and (p.brand like '%${mDTO.sch}%' or p.kname like '%${mDTO.sch}%' or p.ename like '%${mDTO.sch}%' or p.model like '%${mDTO.sch}%' )
+	group by p.model) as aa
+	limit #{spDTO.start},#{spDTO.limit}
+	
+</select>
+
+
+
+<select id="popularfilter" resultType="MainDTO" parameterType="HashMap">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and p.brand = #{mDTO.brand}
+	group by p.model
+	order by p.cnt desc
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="popularfilter2" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and (p.brand like '%${mDTO.sch}%' or p.kname like '%${mDTO.sch}%' or p.ename like '%${mDTO.sch}%' or p.model like '%${mDTO.sch}%' )
+	group by p.model) as aa
+	order by cnt desc
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="rel_datefilter" resultType="MainDTO" parameterType="HashMap">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and p.brand = #{mDTO.brand}
+	group by p.model
+	order by rel_date desc  
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="rel_datefilter2" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and (p.brand like '%${mDTO.sch}%' or p.kname like '%${mDTO.sch}%' or p.ename like '%${mDTO.sch}%' or p.model like '%${mDTO.sch}%' )
+	group by p.model) as aa
+	order by rel_date desc
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="reg_datefilter" resultType="MainDTO" parameterType="HashMap">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and p.brand = #{mDTO.brand}
+	group by p.model
+	order by reg_date desc  
+	limit #{spDTO.start},#{spDTO.limit}
+	
+</select>
+
+<select id="reg_datefilter2" resultType="MainDTO" parameterType="HashMap">
+	select * from
+    (select p.* from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and (p.brand like '%${mDTO.sch}%' or p.kname like '%${mDTO.sch}%' or p.ename like '%${mDTO.sch}%' or p.model like '%${mDTO.sch}%' )
+	group by p.model) as aa
+	order by reg_date desc
+	limit #{spDTO.start},#{spDTO.limit}
+	
+</select>
+
+
+<select id="searchlist" resultType="MainDTO" parameterType="HashMap">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null and p.brand = #{mDTO.brand}
+	group by p.model
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+
+<select id="popularlist" resultType="MainDTO" parameterType="MainDTO">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model
+	order by p.cnt desc 
+	limit 0,4
+</select>
+<select id="recentlist" resultType="MainDTO" parameterType="MainDTO">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model
+	order by reg_date desc  
+	limit 0,4
+</select>
+<select id="newlist" resultType="MainDTO" parameterType="MainDTO">
+	select p.*,count(*) from 
+	product p left outer join stock s on p.model = s.model
+	where  s.grade != '' and s.sdate is null
+	group by p.model
+	order by rel_date desc  
+	limit 0,4
+</select>
+<select id="catelist" resultType="BrandDTO" parameterType="BrandDTO">
+	select * from brand 
+</select>
+
+<select id="prodInfo" resultType="MainDTO" >
+	select * from product where model = #{model} 
+</select>
+
+<select id="stockCnt" resultType="java.lang.Integer" parameterType="HashMap">
+	select count(*) from stock where model = #{mDTO.model} and sdate is null
+</select>
+
+<select id="stocklist" resultType="StockDTO" parameterType="HashMap">
+	select * from stock 
+	where model = #{mDTO.model} and sdate is null
+	limit #{spDTO.start},#{spDTO.limit}
+</select>
+
+<select id="stockInfo" resultType="StockDTO" parameterType="StockDTO">
+	select * from stock where productid = #{productid}
+</select>
+
+<update id="stocksell">
+	update stock set sdate = sysdate() where productid = #{productid}
+</update>
+
+<insert id="newsell" parameterType="PorderDTO">
+	insert into porder
+	(kind, pid, model, pdate, state, psize)
+	values
+	("매입", #{pid}, #{model}, sysdate(),"미수령", #{psize})
+</insert>
+
+
+<select id="searchProd" resultType="MainDTO" parameterType="MainDTO">
+   select p.*,COUNT(*) as tot from
+      product p left outer join stock s on p.model = s.model
+      where pid != '' and (kname like '%${search}%' or ename like '%${search}%' or p.model like '%${search}%') and s.sdate is null
+      GROUP by p.model; 
+</select>
+ 
+
+</mapper>

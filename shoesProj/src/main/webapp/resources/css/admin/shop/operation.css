@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+
+#opertion{
+	margin-left: 30px;
+	height: 700px;
+}
+
+#opertion h3{
+	margin: 10px 0;
+}
+#opertion h4{
+	margin: 5px 0;
+}
+
+.table{
+	border: 1px solid #ccc;
+	width: 1000px;
+	height: 150px;
+	text-align: center;
+}
+
+.table div{
+	box-sizing: border-box;
+}
+
+
+
+.table > div{
+	float:left;
+	border: 1px solid #ccc;
+}
+
+.table > div:nth-of-type(1){
+	background: #eee;
+	width: 200px;
+	height: 150px;
+	line-height: 150px;
+}
+
+.table > div:nth-of-type(2){
+	width: 800px;
+	height: 150px;
+}
+
+.intable, .intable1{
+	width: 760px;
+	
+	margin-top: 10px;
+	margin-left: 22px;
+}
+
+.intable > div{
+	float:left;
+	
+	width: 190px;
+	height: 30px;
+	
+	border: 1px solid #ccc;
+	line-height: 30px;
+}
+
+.intable > div:nth-of-type(1), .intable > div:nth-of-type(2), .intable > div:nth-of-type(3), .intable > div:nth-of-type(4) {
+	background: #eee;
+}
+
+.intable > div:nth-of-type(4n+1){
+	width: 140px;
+}
+.intable > div:nth-of-type(4n+2){
+	width: 340px;
+}
+.intable > div:nth-of-type(4n+3){
+	width: 140px;
+}
+.intable > div:nth-of-type(4n+4){
+	width: 140px;
+}
+
+.intable1 > div{
+	float:left;
+	
+	width: 190px;
+	height: 30px;
+	
+	border: 1px solid #ccc;
+	line-height: 30px;
+}
+
+.intable1 > div:nth-of-type(1), .intable1 > div:nth-of-type(2), .intable1 > div:nth-of-type(3){
+	background: #eee;
+}
+
+.intable1 > div:nth-of-type(3n+1){
+	width: 140px;
+}
+.intable1 > div:nth-of-type(3n+2){
+	width: 480px;
+}
+.intable1 > div:nth-of-type(3n+3){
+	width: 140px;
+}
+
+.table >div> input{
+	float: right;
+	width: 60px;
+	height: 25px;
+	line-height: 25px;
+	margin: 5px 16px;
+}
+
+.intable > div >input[type=text]{
+	float: left;
+	text-align: center;
+}
+
+.intable > div>  input[type=text]{
+	width: 120px;
+	margin-top: 4px;
+	margin-left: 8px;
+}
+
+.intable > div:nth-of-type(4n+6) > input[type=text]{
+	width: 315px;
+}
+
+.intable1 > div >input[type=text]{
+	float: left;
+	text-align: center;
+}
+
+.intable1 > div>  input[type=text]{
+	width: 120px;
+	margin-top: 4px;
+	margin-left: 8px;
+}
+
+.intable1 > div:nth-of-type(3n+5) > input[type=text]{
+	width: 460px;
+}
+
+

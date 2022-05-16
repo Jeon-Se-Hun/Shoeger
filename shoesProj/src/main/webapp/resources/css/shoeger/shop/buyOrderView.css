@@ -1,0 +1,89 @@
+@charset "UTF-8";
+.cont{
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 80px;
+	border-top : 1px solid #eee;
+	border-bottom : 1px solid #eee;
+	display: flex;
+	justify-content: space-around;
+	line-height: 40px;
+	clear: both;
+}
+
+.cont > div{
+	height: 80px;
+}
+
+.cont > div:nth-child(1){
+	width: 70%;
+}
+
+.cont > div:nth-child(2){
+	padding: 15px;
+	width: 15%;
+	text-align: center;
+	line-height: 80px;
+}
+
+.check{
+	width: 30px;
+	height: 30px;
+	
+}
+
+#prodimg{
+	width: 350px;
+	height: 350px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#buycon{
+	margin: auto;
+	width: 150px;
+	height: 50px;
+	background: #fff;
+	border: none;
+	border-radius: 20px;
+	color: #eee;
+	font-family: "HY견고딕";
+	font-size: 18px;
+}
+
+.modal-footer{
+	text-align: center;
+}
+
+.abc{
+	width: 30px;
+	height: 30px;
+}
+
+#info{
+	float: left;
+	width: 400px;
+	height: 350px;
+	padding-left: 50px;
+	padding-right: 30px;
+	padding-top: 30px;
+}
+
+.tt{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+	font-size: 16px;
+}
+
+#ename{
+	font-size: 20px;
+	font-weight: bolder;
+	
+}
+
+#kname{
+	margin-top: 10px;
+	margin-bottom: 90px;
+}

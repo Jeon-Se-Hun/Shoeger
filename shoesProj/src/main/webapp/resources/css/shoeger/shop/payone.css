@@ -1,0 +1,148 @@
+@charset "UTF-8";
+.subOuter1{
+	width: 70%;
+	height: 300px;
+	border-bottom: 1px solid #ccc;
+	display: flex;
+	justify-content: space-between;
+	margin: auto;
+	
+}
+
+.subOuter2{
+	width: 70%;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 70px;
+	padding-right: 70px;
+	margin: auto;
+	border-bottom: 1px solid #ccc;
+}
+
+
+
+#ccc{
+	width: 100%;
+	height: 1300px;
+	text-align: center;
+	
+}
+
+.bbb{
+	display: flex;
+	justify-content: space-between;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+
+#ii{
+	width: 300px;
+	height: 300px;
+	margin: 10px;
+}
+
+#iii{
+	width: 100%;
+	border-radius: 20px;
+}
+
+#pp{
+	padding-top: 30px;
+	padding-right: 50px;
+	padding-left: 50px;
+	width: 70%;
+	
+}
+
+#pp > div{
+	padding: 5px;
+	
+}
+
+
+.inp{
+	text-align: right;
+	border: none;
+	border-bottom: 1px solid #ccc;
+
+}
+
+#paybtns{
+	margin: auto;
+	width: 320px;
+	height: 60px;
+	display: flex;
+	justify-content:space-between; 
+	
+}
+
+#realpay{
+	margin-top: 30px;
+	width: 150px;
+	height: 60px;
+	background-image: url("../../../fff/kakao.png");
+	background-size: 150px;
+	border: none;
+	border-radius: 30px;
+	
+}
+
+#fakepay{
+	
+	margin-top: 30px;
+	width: 150px;
+	height: 60px;
+	background: #f00;
+	border: none;
+	font-family: "HY견고딕";
+	color: #fff;
+	font-size: 20px;
+	border-radius: 30px;
+}
+
+#finalpay{
+	font-weight: bolder;
+	font-size: 18px;
+}
+
+#qwe{
+	margin-top: 20px;
+}
+
+.cdn{
+	width: 80px;
+	text-align: center;
+	border:none;
+	border-bottom: 1px solid #ccc;
+	
+}
+
+#cardchoice{
+	border:none;
+	border-bottom: 1px solid #ccc;
+}
+
+.title{
+	font-weight: bolder;
+	font-size: 22px;
+	margin-bottom: 40px;
+}
+
+#proinf{
+	margin-bottom: 50px;
+}
+
+#cdcd{
+	
+	width: 100%;
+	text-align: right;
+	
+}
+
+section{
+	
+	height: 1400px;
+}

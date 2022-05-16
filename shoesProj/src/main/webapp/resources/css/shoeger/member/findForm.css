@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+#wrapper {
+	text-align : center;
+	margin-top : 100px;
+	position: relative;
+}
+
+#content {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	width: 460px;
+}
+
+.btn_phone{
+	margin-top: 20px;
+}
+
+#sendPhoneNumber {
+	width : 100%;
+	height : 50px;
+	border: 0;
+	cursor: pointer;
+	color : #888;
+	font-size: 20px;
+}
+
+.box {
+	display: block;
+	width: 100%;
+	height: 51px;
+	border: solid 1px #dadada;
+	padding: 10px 14px 10px 14px;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+}
+
+.int {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 29px;
+	border: none;
+	background: #fff;
+	font-size: 15px;
+}
+
+.add {
+	width: 200px;
+	height: 30px;
+	margin-top: 10px;
+}

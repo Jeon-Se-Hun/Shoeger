@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+#total{
+	margin-left: 90px;
+}
+#total> div{
+	float: left;
+}
+
+#ssState{
+	margin-top: 10px;
+	height: 130px;
+}
+#ssState > div{
+	float: left;
+	
+	width: 550px;
+	height: 100px;
+}
+
+#ssState > div:first-of-type{
+	margin-top: 5px;
+}
+#ssState > div:nth-of-type(2){
+	width: 550px;
+	margin-top: 2px;
+	margin-left: 30px;
+}
+#ssState > div > div{
+	float: left;
+	border: 1px solid #ccc;
+	
+	box-sizing:border-box;
+	
+	width: 137px;
+	height: 50px;
+}
+
+#ssState > div > div > div:nth-of-type(2){
+	text-align: right;
+	margin-right: 5px;
+}
+
+#ssState > table{
+	float: left;
+	border-spacing: 5px;
+}
+
+#table1 td > div{
+	width: 126px;
+	height: 40px;
+	background: #eee;
+	float: left;
+	
+	line-height: 40px;
+	padding: 5px;
+}
+
+#table1 td > div:nth-of-type(2){
+	text-align: right;
+	padding-right: 5px;
+}
+
+#memState{
+	width: 550px;
+}
+
+#memState h3{
+	margin-bottom: 10px;
+}
+
+#senState{
+	width: 550px;
+	height: 300px;
+	
+	margin-left: 30px;
+}
+#senState h3{
+	margin-bottom: 10px;
+}
+
+#senState > div{
+	text-align: center;
+}
+
+#senState > div > div{
+	height:50px;
+	line-height: 50px;
+	float: left;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#senState > div > div:nth-of-type(1),#senState > div > div:nth-of-type(2),#senState > div > div:nth-of-type(3){
+	background: #eee;
+	height:40px;
+	line-height: 40px;
+}
+
+
+#senState > div > div:nth-of-type(3n+1){
+	width: 350px;
+}
+
+#senState > div > div:nth-of-type(3n+2){
+	width: 100px;
+}
+
+#senState > div > div:nth-of-type(3n+3){
+	width: 100px;
+}

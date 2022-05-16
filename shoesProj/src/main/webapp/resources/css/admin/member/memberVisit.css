@@ -1,0 +1,70 @@
+@charset "UTF-8";
+#visitlist{
+	width: 980px;
+	height: 1000px;
+	margin-left: 60px;
+	margin-top: 50px;
+}
+#visitlist > #visittitle > div{
+	border : 1px solid #bbb;
+	height: 30px;
+	background: #eee;
+	line-height: 30px;
+}
+#visitlist > #visitdata > div{
+	border : 1px solid #bbb;
+	height: 45px;
+	background: #fff;
+	line-height: 45px;
+}
+#visitlist > div > div{
+	float: left;
+	text-align: center;	
+}
+#visitlist > div > div:nth-of-type(5n+1){
+	width: 68px;	
+}
+#visitlist > div > div:nth-of-type(5n+2){
+	width: 218px;
+	white-space:normal;
+}
+#visitlist > div > div:nth-of-type(5n+3){
+	width: 218px;
+}
+#visitlist > div > div:nth-of-type(5n+4){
+	float: left;
+	width: 218px;
+	white-space:normal;
+}
+#visitlist > div > div:nth-of-type(5n+5){
+	float: left;
+	width: 218px;
+}
+
+.btn {
+	border: none;
+	outline: none;
+	background-color: white;
+	color: #aaaaaa;
+	font-size: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.btn:hover {
+	color: black;
+}
+
+.btn:focus {
+	color: black;
+}
+
+.btnCC {
+	color: black;
+}
+
+.btnDD{
+	text-align: center;
+	height: 300px;
+	line-height: 80px;
+}

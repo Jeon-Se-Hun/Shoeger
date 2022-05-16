@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+a:link {
+	color: black;
+}
+
+a:visited {
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+a:active {
+	color: gray;
+}
+
+a {
+	text-decoration: none;
+}
+
+hr {
+	margin: 0px;
+}
+
+.total {
+	width: 1000px;
+	height: 1000px;
+}
+
+.signboard {
+	font-size: 35px;
+}
+
+.writeTitle>input {
+	margin-top: 10px;
+	width: 850px;
+	height: 30px;
+	border-style: solid;
+	border-color: #828282;
+	border-radius: 0.4em;
+}
+
+.createFile>input {
+	padding-top: 16px;
+	display: inline;
+}
+
+.createFile>img {
+	height: 200px;
+	width: auto;
+}
+
+.create>textarea {
+	width: 1000px;
+	height: 800px;
+	background: #f7f7f7;
+	width: 962px;
+}
+
+.contents {
+	padding: 18px;
+	font-size: 16px;
+	font-weight: 550;
+}
+
+.move {
+	padding-top: 15px;
+	border-top: 1px solid;
+	border-top-color: #828282;
+}
+
+.move>* {
+	padding-left: 15px;
+	padding-right: 15px;
+	font-weight: 550;
+	background-color: #eeeeee;
+	border-radius: 0.4em;
+	height: 30px;
+}
+
+.move>div {
+	padding-top: 6px;
+	float: left;
+	width: 70px;
+	height: 30px;
+	text-align: center;
+}

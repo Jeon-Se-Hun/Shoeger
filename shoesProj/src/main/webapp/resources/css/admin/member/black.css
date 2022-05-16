@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+#dropsch{
+	width: 970px;
+	height: 140px;
+	margin-top: 50px;
+	margin-left: 50px;
+	line-height: 50px;
+}
+#dropschbox1{
+	float: left;
+	width: 150px;
+	height: 50px;
+	line-height: 50px;
+	text-align:center;
+	background-color: #eee;
+	border: 1px solid #bbb;
+}
+#dropschbox2{
+	width: 955px;
+	height: 50px;
+	line-height: 50px;
+	background-color: #fff;
+	border: 1px solid #bbb;
+}
+
+#dropschbox2 select{
+	margin-left: 15px;
+	height: 25px;
+	width: 100px;
+}
+
+#dropschbox2 input[type="text"]{
+	height: 20px;
+	width: 300px;
+}
+#dropschbox2 input[type="submit"]{
+	margin-left: 5px;
+	height: 25px;
+	width: 50px;
+}
+#droplist{
+	width: 970px;
+	height: 1000px;
+	margin-left: 50px;
+}
+#droplist > #droptitle > div{
+	border : 1px solid #bbb;
+	height: 30px;
+	background: #eee;
+	line-height: 30px;
+}
+#droplist > #dropdata > div{
+	border : 1px solid #bbb;
+	height: 30px;
+	background: #fff;
+	line-height: 30px;
+}
+#droplist > div > div{
+	float: left;
+	text-align: center;	
+}
+#droplist > div > div:nth-of-type(8n+1){
+	width: 50px;	
+}
+#droplist > div > div:nth-of-type(8n+2){
+	width: 200px;
+}
+#droplist > div > div:nth-of-type(8n+3){
+	width: 90px;
+}
+#droplist > div > div:nth-of-type(8n+4){
+	float: left;
+	width: 200px;
+}
+#droplist > div > div:nth-of-type(8n+5){
+	width: 160px;
+}
+#droplist > div > div:nth-of-type(8n+6){
+	width: 60px;
+}
+#droplist > div > div:nth-of-type(8n+7){
+	width: 100px;
+}
+#droplist > div > div:nth-of-type(8n+8){
+	width: 80px;
+}
+
+.btn {
+	border: none;
+	outline: none;
+	background-color: white;
+	color: #aaaaaa;
+	font-size: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.btn:hover {
+	color: black;
+}
+
+.btn:focus {
+	color: black;
+}
+
+.btnCC {
+	color: black;
+}
+
+.btnDD{
+	text-align: center;
+	height: 300px;
+	line-height: 80px;
+}

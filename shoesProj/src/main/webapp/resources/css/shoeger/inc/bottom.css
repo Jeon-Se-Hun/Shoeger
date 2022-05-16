@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.boOut{
+	width: 100%;
+	height: 170px;
+	border-top: 1px solid #ccc;
+}
+
+.boOut > div{
+	width: 150px;
+	height: 150px;
+	float: left;
+	margin :10px;
+	font-size: 13px;
+	line-height: 22px;
+}
+
+.boOut > div:first-of-type{
+	margin-left : 60px;
+}
+
+.boOut > div > a{
+	text-decoration: none;
+	color: #555;
+	cursor: pointer;
+}
+h5{
+	font-weight: 600;
+	margin-bottom: 15px;
+	color: #444;
+}
+#boText{
+	margin-top :20px;
+	margin-left : 600px;
+	width: 500px;	
+	color: #555;
+	line-height: 25px;
+}

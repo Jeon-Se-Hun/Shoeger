@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="aaa.model.ClientMapper">
+
+	<select id="shopInfo" resultType="ClientDTO">
+		select * from client where kind='사업자';
+	</select>
+
+	<select id="idChk" resultType="ClientDTO" parameterType="ClientDTO">
+		select * from secession where pid = #{pid}
+	</select>
+
+	<select id="addAdmin" resultType="Integer" parameterType="ClientDTO">
+		SELECT COUNT(CASE WHEN kind='관리자' THEN 1 END) FROM client
+	</select>
+
+	<select id="login" resultType="ClientDTO" parameterType="clientDTO">
+		select * from client where pid = #{pid} and pw = #{pw}
+	</select>
+
+	<select id="joinChk" resultType="ClientDTO" parameterType="clientDTO">
+		select * from client where pid = #{pid}
+	</select>
+
+	<sql id="whereGo">
+		<choose>
+			<when test="pid != null and pid != ''">
+				<choose>
+					<when test="pw != null and pw != ''">
+						<where>
+							pid = #{pid} and pw = #{pw}
+						</where>
+					</when>
+					
+					<otherwise>
+						<where>
+							pid = #{pid}
+						</where>
+					</otherwise>
+									
+				</choose>
+			</when>
+			
+			<when test="phone != null and phone != ''">
+				<where>
+					phone = #{phone} and kind != "네이버"
+				</where>
+			</when>
+		</choose>
+	</sql>
+
+	<select id="clientChk" resultType="ClientDTO" parameterType="ClientDTO">
+		select * from client 
+		<include refid="whereGo" />
+	</select>
+
+	<insert id="join" parameterType="ClientDTO">
+		insert into  client (kind, pid, pw, pname, email, address1, phone, birth, reg_date) 
+		values (#{kind}, #{pid}, #{pw}, #{pname}, #{email}, #{address1}, #{phone}, #{birth}, sysdate())
+	</insert>
+
+	<update id="changePw" parameterType="ClientDTO">
+      update client set pw = #{pw} where phone = #{phone} and kind != "네이버"
+	</update>
+	
+	<select parameterType="clientDTO" resultType="TradeDTO" id="trade">
+		select * from trade where pid = #{pid} 
+	</select>
+
+	<select parameterType="HashMap" resultType="WishDTO" id="wish">
+      select w.*,s.img1,p.kname,p.ename,s.psize,s.grade,s.sdate from
+      wish w left outer join product p
+      on w.model = p.model 
+      left outer join stock s 
+      on w.num = s.productid
+      WHERE w.pid =#{cDTO.pid} order by w.num desc
+      limit #{pageDTO.start}, #{pageDTO.limit}
+   </select>
+   
+   <select parameterType="clientDTO" resultType="java.lang.Integer" id="wishCnt">
+      select count(*) from
+      wish w left outer join product p
+      on w.model = p.model 
+      left outer join stock s 
+      on w.num = s.productid
+      WHERE w.pid =#{pid};
+   </select>
+
+      <update parameterType="clientDTO" id="email">
+      update client set email = #{email}, pname = #{pname}, phone = #{phone}, psize = #{psize}, pw = #{pw}  where pid = #{pid}
+   	  </update>
+
+
+	<update parameterType="clientDTO" id="payment">
+		update client set card = #{card}, cardnum = #{cardnum} where pid = #{pid} 
+	</update>
+
+	<update parameterType="clientDTO" id="account">
+		update client set account = #{account}, accountnum = #{accountnum}, accountname = #{accountname} where pid = #{pid} 
+	</update>
+
+	<update parameterType="clientDTO" id="address">
+		update client set address2 = #{address2}, address3 = #{address3}, maddress = #{maddress} where pid = #{pid} 
+	</update>
+	
+	
+	 <sql id="whereGO2">
+	  	<choose>
+		<when test="bDTO.sch != null and bDTO.sch != ''">
+				and ${bDTO.kind} like '%${bDTO.sch}%'
+
+		</when>
+	  	</choose>
+	  </sql>
+	
+	  <select id="bblist" resultType="boardDTO"
+		parameterType="HashMap">
+
+
+		select * from board where kind = #{cate}
+		<!-- <if test="bDTO.cnt != null and bDTO.cnt != ''">
+			and <![CDATA[cnt 
+			>= #{bDTO.cnt}]]>
+			
+		</if> -->
+		<include refid="whereGO2" />
+
+
+		order by id desc
+		limit #{pDTO.start}, #{pDTO.limit}
+
+	</select>
+	
+	   <select id="bbdetail" resultType="boardDTO" parameterType="boardDTO">
+	      select * from board where id = #{id}
+	   </select>
+	
+	   <select id="totalCnt" resultType="java.lang.Integer" parameterType="boardDTO">
+		select count(*) from board where kind = #{cate}
+		<include refid="whereGO2" />
+		</select>
+	
+	   <delete id="bbDelete" parameterType="boardDTO">
+		delete from board where id = #{id}
+	</delete>
+	
+	  <insert id="bbInsert" parameterType="boardDTO">
+		insert into board
+		(title, pid, pw, upfile, content, cnt, reg_date, kind)
+		values
+		(#{title },#{pid},#{pw},#{upfile},#{content},0, sysdate(), 'qna')
+
+		<selectKey keyProperty="id" order="AFTER" resultType="Integer">
+			select max(id) from board
+		</selectKey>
+	</insert>
+	
+	   <update id="bbModify" parameterType="boardDTO">
+		update board set
+		title = #{title}, pid = #{pid}, upfile = #{upfile}, content = #{content}
+		where id= #{id}
+	</update>
+	
+	   <update id="addCount" parameterType="boardDTO">
+		update board set cnt = cnt +
+		1 where id = #{id}
+	</update>
+	   
+	      <select id="purchase" resultType="PorderDTO" parameterType="HashMap">
+         select s.psize, p.*,p2.img1,p2.kname from
+         porder p left outer join stock s
+         on p.productid = s.productid
+         left outer join product p2
+         on p.model = p2.model
+         WHERE p.productid = s.productid and kind ='매출' and p.pid=#{cDTO.pid} order by p.productid desc
+         limit #{pageDTO.start}, #{pageDTO.limit}
+      </select>
+      
+      <select id="purchaseCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+         select count(*) from
+         porder p left outer join stock s
+         on p.productid = s.productid
+         left outer join product p2
+         on p.model = p2.model
+         WHERE p.productid = s.productid and kind ='매출' and p.pid=#{pid} order by p.productid desc
+      </select>
+      
+      <select id="purchasecate" resultType="PorderDTO" parameterType="HashMap">
+         select p.*,p2.img1,p2.kname,s.psize from
+         porder p left outer join stock s
+         on p.productid = s.productid
+         left outer join product p2
+         on p.model = p2.model
+         WHERE p.productid = s.productid and kind ='매출' and p.pid=#{cDTO.pid} and state=#{cDTO.serch} order by p.productid desc
+         limit #{pageDTO.start}, #{pageDTO.limit}
+      </select>
+      
+      <select id="purchasecateCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+         select count(*) from
+         porder p left outer join stock s
+         on p.productid = s.productid
+         left outer join product p2
+         on p.model = p2.model
+         WHERE p.productid = s.productid and kind ='매출' and p.pid=#{pid} and state=#{serch} order by p.productid desc
+      </select>
+      
+      <select id="sale" resultType="PorderDTO" parameterType="HashMap">
+         select p.*,p2.img1,p2.kname,s.psize,s.grade,s.bprice from
+		porder p left outer join stock s
+		on p.productid = s.productid
+		left outer join product p2
+		on p.model = p2.model
+		WHERE kind ='매입' and p.pid=#{cDTO.pid} order by p.tradeid desc
+		limit #{pageDTO.start}, #{pageDTO.limit}
+      </select>
+      
+      <select id="saleCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+        select count(*) from
+		porder p left outer join stock s
+		on p.productid = s.productid
+		left outer join product p2
+		on p.model = p2.model
+		WHERE kind ='매입' and p.pid=#{pid} order by p.tradeid desc;
+      </select>
+      
+      <select id="salecate" resultType="PorderDTO" parameterType="HashMap">
+         select p.*,p2.img1,p2.kname,s.psize,s.grade,s.bprice from
+		porder p left outer join stock s
+		on p.productid = s.productid
+		left outer join product p2
+		on p.model = p2.model
+		WHERE kind ='매입' and p.pid=#{cDTO.pid} and state=#{cDTO.serch} order by p.tradeid desc
+		limit #{pageDTO.start}, #{pageDTO.limit}
+      </select>
+      
+      <select id="salecateCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+        select count(*) from
+		porder p left outer join stock s
+		on p.productid = s.productid
+		left outer join product p2
+		on p.model = p2.model
+		WHERE kind ='매입' and p.pid=#{pid} and state=#{serch} order by p.tradeid desc;
+      </select>
+      
+      <select id="client" resultType="ClientDTO" parameterType="ClientDTO">
+      select * from client where pid = #{pid}
+   	  </select>
+   	  
+      <insert id="neworder" parameterType="PorderDTO">
+	      insert into porder
+	      (kind, pid, model, price, pdate, state, productid, pointuse, psize)
+	      values
+	      ("매출", #{pid}, #{model}, #{price}, sysdate(), "주문접수", #{productid}, #{pointuse}, #{psize})
+	      
+	      <selectKey resultType="java.lang.Integer" keyProperty="tradeid" order="AFTER">
+	         select MAX(tradeid) from porder
+	      </selectKey>
+      </insert>
+      
+      <delete id="wishdel" parameterType="WishDTO">
+         DELETE FROM wish WHERE num = #{num};
+      </delete>
+      
+      
+       <select id="mymain" parameterType="ClientDTO" resultType="MyDTO">
+         SELECT
+         COUNT(case when kind ='매출' then 1 end) as sale1,
+       COUNT(case when state ='주문접수' and kind ='매출' then 1 end) as sale2,
+       COUNT(case when state='배송준비중'and kind ='매출' then 1 end) as sale3,
+       COUNT(case when state='완료'and kind ='매출' then 1 end) as sale4,
+       COUNT(case when kind ='매입'  then 1 end) as pur1,
+       COUNT(case when state='미수령' and kind ='매입' then 1 end) as pur2,
+       COUNT(case when state='수령' and kind ='매입' then 1 end) as pur3,
+       COUNT(case when state='검수중' and kind ='매입' then 1 end) as pur4,
+       COUNT(case when state='취소'and kind ='매입' then 1 end) as pur5,
+       COUNT(case when state='완료'and kind ='매입' then 1 end) as pur6,
+       COUNT(case when (kind ='취소' OR kind ='환불') then 1 end) as ref1,
+       COUNT(case when state='환불요청' and kind ='환불' then 1 end) as ref3,
+       COUNT(case when state='취소요청' and kind ='취소' then 1 end) as ref2,
+       COUNT(case when state='완료' and (kind ='취소' OR kind ='환불') then 1 end) as ref4
+         FROM porder where pid = #{pid};
+      </select>
+
+      
+      
+      <select id="miniwish" resultType="WishDTO" parameterType="ClientDTO">
+      select w.*,s.img1,p.kname,s.psize,s.grade from
+      wish w left outer join product p
+      on w.model = p.model 
+      left outer join stock s 
+      on w.num = s.productid
+      WHERE w.pid =#{pid} and s.sdate is null
+      order by w.num desc
+      limit 0, 4
+      ;
+      </select>
+      
+      <insert id="newwish" parameterType="WishDTO">
+	      insert into wish
+	      (num, pid, model)
+	      values
+	      (#{num}, #{pid}, #{model})
+      </insert>
+      
+      <update id="pointuse" parameterType="PorderDTO">
+      update client set point = #{newFinalPoint} where pid= #{pid}
+      </update>
+      
+      <insert id="newtrade">
+      insert into trade
+      (pid, kind, price, adate, point, transport, tradeid)
+      values
+      (#{pid}, "매출", #{price}, sysdate(), #{point}, 0, #{tradeid})
+      </insert>
+      
+       <insert id="visitData" parameterType="visitorDTO">
+	      insert into visitor 
+	      (visit_id, visit_ip, visit_time, visit_agent)
+	      values
+	      (#{visit_id}, #{visit_ip}, sysdate(), #{visit_agent})
+	   </insert>
+
+      <update id="pordermodify" parameterType="PorderDTO">
+         UPDATE porder set state =#{state}, kind =#{kind}, pdate =#{pdate} where productid =#{productid} and kind='매출';
+      </update>
+      
+       <select id="refund" resultType="PorderDTO" parameterType="HashMap">
+        select p.*,p2.img1,p2.kname,s.psize,s.grade from
+       porder p left outer join stock s
+       on p.productid = s.productid
+       left outer join product p2
+       on p.model = p2.model
+       WHERE p.productid = s.productid and (p.state ='완료' or p.state ='환불요청' or p.state ='취소요청') and (kind ='취소' or kind ='환불') and p.pid=#{cDTO.pid} order by p.pdate desc
+       limit #{pageDTO.start}, #{pageDTO.limit}
+      </select>
+      
+      <select id="refundCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+        select count(*) from
+       porder p left outer join stock s
+       on p.productid = s.productid
+       left outer join product p2
+       on p.model = p2.model
+       WHERE p.productid = s.productid and (p.state ='완료' or p.state ='환불요청' or p.state ='취소요청') and (kind ='취소' or kind ='환불') and p.pid=#{pid} order by p.productid desc;
+      </select>
+      
+      <select id="refundcate" resultType="PorderDTO" parameterType="HashMap">
+        select p.*,p2.img1,p2.kname,s.psize,s.grade from
+       porder p left outer join stock s
+       on p.productid = s.productid
+       left outer join product p2
+       on p.model = p2.model
+       WHERE p.productid = s.productid and (p.state ='완료' or p.state ='취소요청' or p.state ='환불요청') and (kind ='취소' or kind ='환불') and p.pid=#{cDTO.pid} and p.state=#{cDTO.serch} order by p.pdate desc
+       limit #{pageDTO.start}, #{pageDTO.limit}
+      </select>
+      
+      <select id="refundcateCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+        select count(*) from
+       porder p left outer join stock s
+       on p.productid = s.productid
+       left outer join product p2
+       on p.model = p2.model
+       WHERE p.productid = s.productid and (p.state ='완료' or p.state ='취소요청' or p.state ='환불요청') and (kind ='취소' or kind ='환불') and p.pid=#{pid} and p.state=#{serch} order by p.pdate desc
+      </select>
+      
+      <select id="secession" resultType="SecessionDTO" parameterType="ClientDTO">
+      select * from client where pid = #{pid}
+   	  </select>
+   	  
+   	  <delete id="delsece" parameterType="ClientDTO">
+         DELETE FROM client WHERE pid = #{pid};
+      </delete>
+   	  
+   	  <insert id="addsece" parameterType="SecessionDTO">
+	      insert into  secession (kind, pid, pw, pname, email, address1, address2, address3, maddress, phone, birth, reg_date, card, account,accountnum,accountname,psize,point) 
+			values (#{kind}, #{pid}, #{pw}, #{pname}, #{email}, #{address1}, #{address2}, #{address3}, #{maddress}, #{phone}, #{birth}, sysdate(), #{card}, #{account}, #{accountnum}, #{accountname}, #{psize}, #{point})
+	   </insert>
+	   
+	   <select id="myqna" resultType="BoardDTO" parameterType="HashMap">
+	   		SELECT * FROM board where pid =#{cDTO.pid} order by id desc
+	   		limit #{pageDTO.start}, #{pageDTO.limit} 
+	   </select>
+	   
+	   <select id="myqnaCnt" resultType="java.lang.Integer" parameterType="ClientDTO">
+	   		SELECT count(*) FROM board where pid =#{pid}
+	   </select>
+	   
+	         <select id="sale1" resultType="PorderDTO" parameterType="ClientDTO">
+         select p.*,p2.img1,p2.kname,s.psize,s.grade from
+		porder p left outer join stock s
+		on p.productid = s.productid
+		left outer join product p2
+		on p.model = p2.model
+		WHERE kind ='매입' and p.pid=#{pid} order by p.tradeid desc;
+      </select>
+	   
+      
+
+</mapper>

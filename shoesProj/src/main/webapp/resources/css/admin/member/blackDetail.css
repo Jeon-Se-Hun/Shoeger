@@ -1,0 +1,47 @@
+@charset "UTF-8";
+#mmtitle{
+	text-align: center;
+	margin-left: 50px;
+}
+#mmdetail{
+	width: 1000px;
+	height: 500px;
+	margin-top: 50px;
+	margin-left: 55px;
+	line-height: 50px;
+	text-align: center;
+}
+#mmform1 > div{
+	float: left;
+}
+#mmform1 > div:nth-of-type(2n-1){
+	width: 150px;
+	height: 50px;
+	background-color: #eee;
+	border: 1px solid #bbb;
+}
+#mmform1 > div:nth-of-type(2n) {
+	width: 340px;
+	height: 50px;
+	background-color: #fff;
+	border: 1px solid #bbb;
+}
+#mmform1 > #addrbox{
+	height: 130px;
+	line-height: 130px;
+}
+#mmform1 > #addrbox2{
+	width: 834px;
+	height: 130px;
+}
+#addrbox2 > div{
+	height: 43px;
+	border-bottom: 1px solid #bbb; 
+}
+#mmbtn{
+	margin-top: 50px;
+	width: 60px;
+	height: 30px;
+	background-color: #bbb;
+	border: 1px solid #eee;
+}

@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+a:link {
+	color: black;
+}
+
+a:visited {
+	color: black;
+}
+
+a:hover {
+	color: black;
+}
+
+a:active {
+	color: gray;
+}
+
+a {
+	text-decoration: none;
+}
+
+hr {
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+.total {
+	width: 1000px;
+	height: 1000px;
+}
+
+.signboard {
+	font-size: 35px;
+}
+
+.list {
+	width: 1000px;
+	padding-top: 17px;
+	padding-bottom: 17px;
+	border-bottom: solid 1px;
+	border-bottom-color: #dddddd;
+	font-size: 15px;
+}
+
+.title {
+	float: left;
+	height: 30px;
+	width: 700px;
+	display: inline-block;
+	font-weight: 580;
+}
+
+.writer {
+	float: left;
+	height: 20px;
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+}
+
+.date {
+	float: left;
+	height: 20px;
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+}
+
+.viewcnt {
+	height: 20px;
+	width: 90px;
+	display: inline-block;
+	text-align: center;
+}
+
+.write {
+	font-size: 15px;
+	font-weight: 700;
+	border-radius: 0.4em;
+	background-color: #eeeeee;
+	width: 100px;
+	height: 25px;
+	padding-top: 3px;
+}
+
+.btn {
+	border: none;
+	outline: none;
+	background-color: white;
+	color: #aaaaaa;
+	font-size: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.btn:hover {
+	color: black;
+}
+
+.btn:focus {
+	color: black;
+}
+
+.btnCC {
+	color: black;
+}
+
+input[type="text"] {
+	height: 24.8px;
+	width: 200px;
+}
+
+select {
+	height: 25px;
+}
+
+#schBtn {
+	border: none;
+	font-weight: 550;
+	background-color: #eeeeee;
+	height: 25px;
+	width: 50px;
+}

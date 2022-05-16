@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+
+.btn{
+	background: none;
+	font-size: 20px;
+	font-weight: bolder;
+	color : #ddd;
+	
+}
+
+.shoplist::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+    width: 0;
+}
+
+#pagebtns{
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+}
+
+.btn:hover{
+	color: blue;
+}
+
+.shoplist {
+	padding-left: 40px;
+	width: 100%;
+	height: 730px;
+	overflow: scroll;
+}
+
+.prodImg1 {
+	margin: 10px;
+	margin-top: 30px;
+	float: left;
+	width: 210px;
+	height: 300px;
+}
+
+.prodprice1 {
+	width: 200px;
+	height: 25px;
+	text-align: right;
+	font-size: 12px;
+}
+
+.prodename1 {
+	margin-top: 10px;
+	font-size: 12px;
+	width: 210px;
+	height: 50px;
+}
+
+#filter {
+	text-align: right;
+	padding-right: 20px;
+}
+
+#filter > a{
+	font-size: 12px;
+}
+
+img {
+	border-radius: 10px;
+	width: 210px;
+	height: 210px;
+}
+
+.filters {
+	background: none;
+	border: none;
+}
+
+.filters:hover {
+	color: blue;
+}
+
+.dbrandlogo{
+	margin-top: 10px;
+	width: 95px;
+	height: 21px;
+}

@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+#showMember{
+	margin-top: 20px;
+	margin-left: 30px;
+	height: 60px;
+	width: 1000px;
+}
+
+#showMember div{
+	text-align: center;
+}
+#showMember h3{
+	margin: 10px 0;
+}
+#showMember h4{
+	margin: 5px 0;
+}
+
+#table1{
+	width: 1000px;
+	margin-top: 30px;
+}
+
+#showMember > div > div{
+	border: 1px solid #ccc;
+	height: 40px;
+	line-height: 40px;
+	float: left;
+	box-sizing: border-box;
+}
+
+.tttt{
+	background: #eee;
+}
+
+#showMember > div > div:nth-of-type(5n+1){
+	width: 200px;
+}
+
+#showMember > div > div:nth-of-type(5n+2){
+	width: 200px;
+}
+
+#showMember > div > div:nth-of-type(5n+3){
+	width: 200px;
+}
+
+#showMember > div > div:nth-of-type(5n+4){
+	width: 200px;
+}
+
+#showMember > div > div:nth-of-type(5n+5){
+	width: 200px;
+}
+
+#showMember > div >#addr1{
+	width: 800px;
+	font-size: 14px;
+	letter-spacing: -.21px;
+	line-height: 20px;
+}
+
+#showMember > div > div > input{
+	width: 130px;
+}
+#showMember > div > div:nth-of-type(5) > input{
+	width: 60px;
+}
+
+#showMember + div{
+	margin-left: 30px;
+	width:1000px;
+	text-align: right;
+}
+
+#showMember + div> input{
+	width: 150px;
+	height: 30px;
+}
+
+#showMember input{
+	float: left;
+	width: 55px;
+	height: 25px;
+	
+	margin-top: 7px;
+}
+
+#showMember input:nth-of-type(1){
+	margin-left: 40px;
+}
+#showMember input:nth-of-type(2){
+	margin-left: 10px;
+}
+
+.move {
+	padding-top: 15px;
+	border-top: 1px solid;
+	border-top-color: #828282;
+	margin-top: 200px;
+}
+
+.move>a {
+	padding-left: 15px;
+	padding-right: 15px;
+	font-weight: 550;
+	background-color: #eeeeee;
+	border-radius: 0.4em;
+	width: 100px;
+	height: 30px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.move>a:link {
+	color: black;
+}
+
+.move>a:visited {
+	color: black;
+}
+
+.move>a:hover {
+	color: black;
+}
+
+.move>a:active {
+	color: gray;
+}

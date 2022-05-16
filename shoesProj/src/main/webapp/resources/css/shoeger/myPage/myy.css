@@ -1,0 +1,291 @@
+@charset "UTF-8";
+   
+.all{   
+   width: 110%;   
+   /* border: 1px solid #000; */   
+   margin: 0 auto;   
+   height: 2000px;   
+   /* margin-top: px; */   
+}   
+.list{   
+   padding: 20px;   
+   /* border: 1px solid #000; */   
+   width: 20%;   
+   height: 100%;   
+   float: left;   
+}   
+.font{   
+   font-size: 20px;   
+   color: black;   
+   text-decoration: none;   
+}   
+#myimpo{   
+   font-size: 30px;   
+}   
+.body{   
+   /* border: 1px solid #000; */   
+   float: left;   
+   width: 80%;   
+   /* 포지션 */   
+}   
+/* sda */   
+.rbgus{   
+   width:70%;   
+   height:90%;   
+   margin-left: 50px;   
+   /* border: 1px solid #000; */   
+}   
+.listin >  img{   
+   width: 149px;   
+   height: 149px;   
+   border-radius: 15px;   
+}   
+.list12{   
+   width: 100%;   
+   height: 151px;   
+   border: 1px solid #000;   
+   border-radius: 15px;   
+   margin-top: 10px;   
+   margin-bottom: 10px;   
+}   
+.listin{   
+   width: 150px;   
+   height: 150px;   
+   float: left;   
+}
+.listin:nth-of-type(2) {   
+      width: 65%;   
+      height: 150px;   
+      font-size: 12px;   
+      margin-left: 20px;   
+      line-height: 25px;   
+}   
+.listin:nth-of-type(3) {   
+      width: 50px;   
+      height: 50px;   
+      margin-top: 5px;   
+}   
+/* input {   
+    padding: 8px 0;   
+    width: 70%;   
+    font-size: 20px;   
+    letter-spacing: -.15px;   
+    line-height: 15px;   
+    border-radius: 15px;   
+    border-bottom: 1px solid #ebebeb;   
+    border-color: #fff;   
+} */   
+.rbgus > div > input {   
+   width:300px;   
+   font-size: 15px;   
+    border-bottom: 1px solid #ebebeb;   
+    border-top: 1px solid #fff;   
+    border-left: 1px solid #fff;   
+    border-right: 1px solid #fff;   
+    background-color: #fff;   
+    outline: 1px solid #fff;   
+}   
+.rbgus > input {   
+   width:500px;   
+   font-size: 15px;   
+    border-bottom: 1px solid #ebebeb;   
+    border-top: 1px solid #fff;   
+    border-left: 1px solid #fff;   
+    border-right: 1px solid #fff;   
+    background-color: #fff;   
+    outline: 1px solid #fff;   
+}   
+select {   
+   font-size: 15px;   
+    border-bottom: 1px solid #ebebeb;   
+    border-top: 1px solid #fff;   
+    border-left: 1px solid #fff;   
+    border-right: 1px solid #fff;   
+    background-color: #fff;   
+    outline: 1px solid #fff;   
+}   
+#dle{   
+   width:50px;   
+}   
+#modify{   
+   width:60px;   
+   border-bottom: 1px solid #fff;   
+}   
+#modify1{   
+   width:100px;   
+   border: 1px solid #ebebeb;   
+   border-radius: 10px;   
+}   
+#aaaa{   
+   width: 50px;   
+   height: 50px;   
+   border: 1px solid #ccc;   
+   border-radius: 10px;   
+   text-align: center;   
+   line-height: 50px;   
+   padding: 0px;   
+   border-top: 1px solid #ccc;   
+}   
+#bbbb{   
+   margin: 0;   
+   width: 70%;   
+   height: 80%;   
+   background-color: none;   
+   border: none;   
+   border-top: 1px solid #ccc;   
+}   
+h1 {   
+   border-bottom: 5px solid #000;   
+}   
+h3 {   
+   border-bottom: 1px solid #aaa;   
+}   
+
+.title {   
+   height: 30px;   
+   width: 700px;   
+   display: inline-block;   
+   font-weight: 580;   
+}   
+   
+.writer {   
+   height: 20px;   
+   width: 100px;   
+   display: inline-block;   
+   text-align: center;   
+}   
+   
+.date {   
+   height: 20px;   
+   width: 100px;   
+   display: inline-block;   
+   text-align: center;   
+}   
+   
+.viewcnt {   
+   height: 20px;   
+   width: 90px;   
+   display: inline-block;   
+   text-align: center;   
+}   
+   
+.write {   
+   font-weight: 550;   
+   border-radius: 0.4em;   
+   background-color: #eeeeee;   
+   width: 100px;   
+   height: 25px;   
+}   
+                      
+td{   
+   border: 1px solid #000;   
+   width: 100px;   
+   height: 60px;   
+   font-size: 20px;   
+   text-align: center;   
+      
+   border-radius: 30px;   
+}   
+#re{   
+   width: 50px;   
+   border: 1px solid #eee;   
+}   
+#modify{   
+   width: 50px;   
+   border: 1px solid #eee;   
+}   
+.rbgus .btnDD .btn1 {   
+   border: none;   
+   outline: none;   
+   background-color: white;   
+   color: #aaaaaa;   
+   font-size: 20px;   
+   padding-left: 10px;   
+   padding-right: 10px;
+}   
+
+.rbgus .btnDD .btn1:hover {   
+   color: black;   
+}   
+.rbgus .btnDD .btn1:focus {   
+   color: black;   
+}   
+.rbgus .btnDD .btnCC {
+   color: black;   
+}   
+.rbgus .btnDD{   
+   text-align: center;   
+   height: 300px;   
+   line-height: 80px;   
+}   
+.rbgus > .btnDD > input {   
+   width:50px;   
+}
+
+.listhhhhh1 {
+   float: left;
+   width:200px;
+   text-overflow: ellipsis;
+   white-space  : nowrap;
+   overflow     : hidden;
+}
+.listhhhhh2 {
+   float: right;
+}
+.listhhhhh3 {
+   float: right;
+   color: #777;
+}
+.listhhhhh1 > a{
+   color: black;
+}
+.listin > input{
+   border-radius:10px;
+   border: 1px solid #ccc;
+   background-color: #fff;
+   line-height: 30px;
+}
+.mymain{
+   /* border: 1px solid #000; */
+   width: 80%;
+   height: 74px;
+   background-color: #eee;
+   border-radius: 15px;
+   
+   display:flex;
+   justify-content: space-between;
+}
+.mymain > div> div{
+   margin: 0 auto;
+}
+.mymain > div:nth-of-type(1) > div{
+   border-left: 1px solid #fff;
+}
+.mymain > div > div > div{
+   margin: 10px;
+   width: 65px;
+   height: 22px;
+   text-align: center;
+   border-radius: 10px;
+}
+a{
+   color: black;
+}
+/* .rbgus > div:nth-of-type(1){
+   float: left;
+}
+#clipoint{
+   float: none;
+} */
+.rbgus > a{
+   color: #ccc;
+}
+.rbgus > a:hover{
+   color: #000;
+}
+.listin > h5{
+   font-size: 15px;
+   margin: 0px;
+   padding: 5px;
+   font-weight: normal;
+}
